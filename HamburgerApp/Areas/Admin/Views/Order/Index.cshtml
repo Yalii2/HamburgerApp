@@ -1,0 +1,52 @@
+﻿@model IEnumerable<HamburgerApp.Business.Models.DTOs.AddOrderDTO>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+
+			<th>
+				TotalPrice
+			</th>
+			<th>
+				Adet
+			</th>
+			<th>
+				CreatedTime
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@ViewBag.Order
+				<td>
+				<td>
+				@item.TotalPrice
+				<td>
+					@Html.DisplayFor(modelItem => item.Available)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CreatedTime)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+					@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+					@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

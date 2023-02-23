@@ -1,0 +1,158 @@
+﻿
+@model HamburgerApp.Business.Models.DTOs.AddBurgerMenuDTO
+
+
+@{
+	ViewData["Title"] = "AddHamburgerMenu";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>AddHamburgerMenu</h1>
+
+<h4>AddBurgerMenuDTO</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="AddHamburgerMenu" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+			<div class="form-group">
+				<label asp-for="ProductName" class="control-label"></label>
+				<input asp-for="ProductName" class="form-control" />
+				<span asp-validation-for="ProductName" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Price" class="control-label"></label>
+				<input asp-for="Price" class="form-control" />
+				<span asp-validation-for="Price" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="UploadPath" class="control-label"></label>
+				<input type="file" asp-for="UploadPath" class="form-control" />
+				<span asp-validation-for="UploadPath" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+<!--extraadd-->
+
+<h1>AddExtraMaterial</h1>
+
+<h4>AddExtraMaterialDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddExtraMaterial" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<!--menülist-->
+<div class="container">
+	<div class="row">
+		<h1>ListOfHamburgerMenu</h1>
+
+		<p>
+			<a asp-action="Create">Create New</a>
+		</p>
+		<table class="table">
+			<thead>
+				<tr>
+
+					<th>
+						ProductName
+					</th>
+					<th>
+						Price
+					</th>
+					<th>
+						ImagePath
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in ViewBag.Menu)
+				{
+					<tr>
+
+						<td>
+							@item.ProductName
+						</td>
+						<td>
+							@item.Price
+						</td>
+						<td>
+							<img src="@item.ImagePath" alt="..." width="100" height="100" />
+						</td>
+						<td>
+							@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+							@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+							@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+</div>
+<!--extralist-->
+<h1>ListOfExtras</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Extra)
+        {
+        <tr>
+            <td>
+                @item.ProductName
+            </td>
+            <td>
+                @item.Price
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+					}
